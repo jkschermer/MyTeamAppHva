@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">MyTeamAppHva</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="intro_fragment_label">Introduction fragment</string>
+    <string name="register_fragment_label">Registration fragment</string>
+
+    // introduction fragment
+    <string name="intro_register_button_text">Register</string>
+    <string name="intro_login_button_text">Login</string>
+    <string name="intro_welcome_text">Welcome to our app, to be able to use this app you will have
+    to register an account. If you already have an account, please login!</string>
+    <string name="register_first_name_hint">Naam</string>
+    <string name="register_achternaam_hint">Achternaam</string>
+    <string name="register_hint_email">Email</string>
+    <string name="register_hint_password">Wachtwoord</string>
+    <string name="submit_btn_text">Register</string>
+    <string name="register_hint_confirm_password">Bevestig wachtwoord</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_hint_btn">Login</string>
+    <string name="register_succesfully_text">Your account has been registered successfully</string>
+    <string name="collectionFirebaseUser">Users</string>
+    <string name="navbar_home_title">Home</string>
+    <string name="navbar_program_title">Programma</string>
+    <string name="navbar_result_title">Uitslagen</string>
+    <string name="nav_player_title">Spelers</string>
+
+    // home screen
+    <string name="competition_table_text">Competitiestand</string>
+    <string name="competition_g">G</string>
+    <string name="competition_W">W</string>
+    <string name="competition_V">V</string>
+    <string name="competition_D">D</string>
+    <string name="competition_P">P</string>
+
+    // main menu
+    <string name="log_out">Uitloggen</string>
+    <string name="hint_club">Club</string>
+
+
+    // program
+    <string name="line_between_two_clubs">-</string>
+
+
+</resources>

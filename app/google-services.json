@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "364604608232",
+    "project_id": "teamapphva",
+    "storage_bucket": "teamapphva.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364604608232:android:2a8635aa8a70d59a72835d",
+        "android_client_info": {
+          "package_name": "com.example.myteamapphva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364604608232-a2p7iclrj8blloairmgid45iabd5tatu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMnV2WpPcvw3l4eaL3ZMZP1OnDCfY5dZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364604608232-a2p7iclrj8blloairmgid45iabd5tatu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

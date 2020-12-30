@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_home"
+        android:title="@string/navbar_home_title"
+        />
+
+    <item android:id="@+id/menu_program"
+        android:title="@string/navbar_program_title"
+        />
+
+    <item android:id="@+id/menu_result"
+        android:title="@string/navbar_result_title"
+        />
+
+    <item android:id="@+id/menu_players"
+        android:title="@string/nav_player_title"
+        />
+
+</menu>

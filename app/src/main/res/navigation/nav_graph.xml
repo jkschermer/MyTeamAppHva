@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="@string/intro_fragment_label"
+    app:startDestination="@id/introFragment">
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.example.myteamapphva.ui.IntroFragment"
+        android:label="@string/intro_fragment_label"
+        tools:layout="@layout/fragment_intro">
+        <action
+            android:id="@+id/action_introFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_introFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.myteamapphva.ui.RegisterFragment"
+        android:label="@string/register_fragment_label"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_introFragment"
+            app:destination="@id/introFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myteamapphva.ui.LoginFragment"
+        android:label="Login fragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.myteamapphva.ui.HomeFragment"
+        android:label="Home fragment"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+
+    <fragment
+        android:id="@+id/programFragment"
+        android:name="com.example.myteamapphva.ui.ProgramFragment"
+        android:label="Program fragment"
+        tools:layout="@layout/fragment_program">
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.example.myteamapphva.ui.ResultFragment"
+        android:label="Result fragment"
+        tools:layout="@layout/fragment_result">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.myteamapphva.ui.PlayerFragment"
+        android:label="Player fragment"
+        tools:layout="@layout/fragment_player">
+    </fragment>
+
+
+</navigation>
