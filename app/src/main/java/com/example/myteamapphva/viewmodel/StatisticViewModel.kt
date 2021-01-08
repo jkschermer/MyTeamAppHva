@@ -57,6 +57,9 @@ class StatisticViewModel(application: Application) : AndroidViewModel(applicatio
                     for(i in stats.value!!.indices) {
                         if(gameResults.value!![i].homeTeam == stats.value!![i].team) {
                             indexTeam = i
+                            if(gameResults.value!!.size == 1) {
+                                break
+                            }
                         }
                     }
                     // first add the stats of the home team

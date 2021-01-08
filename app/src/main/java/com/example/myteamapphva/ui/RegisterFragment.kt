@@ -154,7 +154,7 @@ class RegisterFragment : Fragment() {
             // if there is no data for the corresponding id, then stats can be added
             if (!doc.exists()) {
                 // add empty statistics object for team
-                Firebase.firestore.collection(getString(R.string.collection_path_statistic)).document(userTeam).set(statistic)
+                Firebase.firestore.collection("Statistic").document(userTeam).set(statistic)
             }
         }
     }
