@@ -2,6 +2,7 @@ package com.example.myteamapphva.repository
 
 import com.example.myteamapphva.models.User
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -24,5 +25,12 @@ class UserRepository() {
      */
     fun getPlayers(user: User): Task<QuerySnapshot> {
         return db.collection(collection).whereEqualTo("team", user.team).get()
+    }
+
+    /**
+     * Method that gets the reference of the collection
+     */
+    fun getCollectionOfPlayers(): CollectionReference {
+        return db.collection(collection)
     }
 }

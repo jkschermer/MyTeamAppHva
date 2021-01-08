@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myteamapphva.R
-import com.example.myteamapphva.models.Result
-import com.example.myteamapphva.models.Team
+import com.example.myteamapphva.models.Statistic
 import com.example.myteamapphva.models.User
-import com.example.myteamapphva.viewmodel.TeamViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -47,11 +44,13 @@ class RegisterFragment : Fragment() {
 
         fireBaseInstance = FirebaseAuth.getInstance()
 
-        submitBtn.setOnClickListener { registerAccount(etEmail.text.toString(),
-        etPassword.text.toString())}
+        submitBtn.setOnClickListener {
+            registerAccount(etEmail.text.toString(),
+                    etPassword.text.toString())
+        }
     }
 
-    private fun validate(inputField: String, regex: String? = null) : Boolean {
+    private fun validate(inputField: String, regex: String? = null): Boolean {
         var result = true
         if (inputField.isEmpty()) {
             result = false
@@ -66,24 +65,24 @@ class RegisterFragment : Fragment() {
         return result
     }
 
-    private fun validateAll() :Boolean {
+    private fun validateAll(): Boolean {
         val validateFirstName = validate(etFirstName.text.toString())
         val validateLastName = validate(etLastName.text.toString())
         val validateEmail = validate(etEmail.text.toString(),
-            EMAIL
+                EMAIL
         )
         val validatePassword = validate(etPassword.text.toString())
         var validateConfirmPassword = true
 
         // check if the second password is the same
         if (etPassword.text.toString() != etConfirmPassword.text.toString()) {
-             validateConfirmPassword = false
+            validateConfirmPassword = false
         }
 
         // check if the user has a club name registered
         val validateClubName = validate(etTeam.text.toString().trim())
 
-        if(validateFirstName && validateLastName && validateEmail &&
+        if (validateFirstName && validateLastName && validateEmail &&
                 validatePassword && validateConfirmPassword && validateClubName) {
             return true
         }
@@ -92,54 +91,48 @@ class RegisterFragment : Fragment() {
     }
 
     private fun registerAccount(userEmail: String, userPassword: String) {
-        fireBaseInstance.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener {
-            task ->
+        fireBaseInstance.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener { task ->
 
             if (task.isSuccessful && validateAll()) {
                 Toast.makeText(this.activity, getString(R.string.register_succesfully_text),
-                Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT).show()
 
-                // get current user
+                // gets current user if registration is successful
                 val currentUser = fireBaseInstance.currentUser
 
-                // make user object for storing it into the database
+                // make user object for storing values in the database
                 val user = User()
 
-                // make club object for storing the right club into the user
-                val team = Team()
+                // make stats object for keeping track of the statistics by default all values are zero
+                val stat = Statistic()
 
-                // make result object for keeping track of the statistics by default all values are zero
-                val result = Result()
-
-                // some validation
+                // set values of user object and id of stats object
                 user.name = etFirstName.text.toString().trim()
                 user.lastName = etLastName.text.toString().trim()
                 user.email = etEmail.text.toString().trim()
                 user.username = etEmail.text.toString()
 
-                team.name = etTeam.text.toString().trim()
-                user.team = team.name!!
-
-                // set the club id to a random id with the method below
-
-                team.clubid = createRandomID()
+                // id of statistic
+                stat.team = etTeam.text.toString().trim()
+                user.team = stat.team!!
 
                 if (currentUser != null) {
+                    // sets the id of the user
                     user.id = currentUser.uid
+
+                    // sets the values into the database
                     Firebase.firestore.collection(getString(R.string.collectionFirebaseUser)
-                        ).document(user.id!!).set(user)
+                    ).document(user.id!!).set(user)
 
-                    Firebase.firestore.collection("Teams").document(user.id!!).set(team)
-
-                    // add empty result object to team
-                    Firebase.firestore.collection("Result").document(user.id!!).set(result)
+                    // sets the values of the result
+                    setDefaultStatistics(user.team!!, stat)
                 }
 
-                // navigate to homescreen
+                // navigate to home screen
                 findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
             } else {
                 Log.w("TAG", "Failure cannot register account", task.exception)
-                Toast.makeText(this.activity, "Authentication failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.activity, task.exception?.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -148,7 +141,21 @@ class RegisterFragment : Fragment() {
     /**
      *  Ensures that id of club is unique
      */
-    private fun createRandomID() : Int {
+    private fun createRandomID(): Int {
         return Random().nextInt(100000)
+    }
+
+    /**
+     *  check firestore if id with the name of the team already exists in the database,
+     *  if it does not then you can set the result, otherwise do nothing
+     */
+    private fun setDefaultStatistics(userTeam: String, statistic: Statistic) {
+        Firebase.firestore.collection(getString(R.string.collection_path_statistic)).document(userTeam).get().addOnSuccessListener { doc ->
+            // if there is no data for the corresponding id, then stats can be added
+            if (!doc.exists()) {
+                // add empty statistics object for team
+                Firebase.firestore.collection(getString(R.string.collection_path_statistic)).document(userTeam).set(statistic)
+            }
+        }
     }
 }

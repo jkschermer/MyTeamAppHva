@@ -32,17 +32,17 @@
 
                 <TextView
                     android:id="@+id/tvClubName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:id="@+id/tvPlayedGames"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginLeft="70dp" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp" />
 
                 <TextView
                     android:id="@+id/tvWonGames"

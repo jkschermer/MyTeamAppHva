@@ -9,20 +9,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myteamapphva.R
-import com.example.myteamapphva.models.Team
-import com.example.myteamapphva.models.Result
-import com.example.myteamapphva.viewmodel.ResultViewModel
-import com.example.myteamapphva.viewmodel.TeamViewModel
+import com.example.myteamapphva.models.GameResult
+import com.example.myteamapphva.models.Statistic
+import com.example.myteamapphva.viewmodel.GameResultViewModel
+import com.example.myteamapphva.viewmodel.StatisticViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
-    private var result = arrayListOf<Result>()
-    private var teams = arrayListOf<Team>()
+    private var statistic = arrayListOf<Statistic>()
     private lateinit var homeAdapter: HomeAdapter
-    private val teamViewModel: TeamViewModel by viewModels()
-    private val resultViewModel: ResultViewModel by viewModels()
+    private val statisticViewModel: StatisticViewModel by viewModels()
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -36,36 +34,26 @@ class HomeFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        // init collection of club
-        teamViewModel.getTeams()
-
         // init collection of results
-        resultViewModel.getResults()
+        statisticViewModel.getStatistics()
 
-        observeTeams()
         observeResults()
         initView()
     }
 
     private fun initView() {
-        homeAdapter = HomeAdapter(result, teams)
+        homeAdapter = HomeAdapter(statistic)
         rvRanking.layoutManager = LinearLayoutManager(context)
         rvRanking.adapter = homeAdapter
     }
-
-    private fun observeTeams() {
-        teamViewModel.teams.observe(viewLifecycleOwner, Observer { team ->
-            teams.clear()
-            teams.addAll(team)
-            homeAdapter.notifyDataSetChanged()
-        })
-    }
     
     private fun observeResults() {
-        resultViewModel.results.observe(viewLifecycleOwner, Observer{
+        statisticViewModel.stats.observe(viewLifecycleOwner, Observer{
             res ->
-            result.clear()
-            result.addAll(res)
+            statistic.clear()
+            statistic.addAll(res)
+            // sort the statistics on its points
+            statistic.sortWith(compareByDescending { it.points})
             homeAdapter.notifyDataSetChanged()
         })
     }

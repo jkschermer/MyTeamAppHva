@@ -5,20 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteamapphva.R
-import com.example.myteamapphva.models.Game
+import com.example.myteamapphva.models.GameResult
 import kotlinx.android.synthetic.main.item_program.view.*
 
-class ResultAdapter(private val results: ArrayList<Game>) : RecyclerView.Adapter
+class ResultAdapter(private val results: ArrayList<GameResult>) : RecyclerView.Adapter
     <ResultAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun databind(game: Game) {
-            itemView.tvDate.text = game.date.toString()
-            itemView.tvHomeTeam.text = game.homeTeam
-            itemView.tvAwayTeam.text = game.awayTeam
+        fun databind(gameResult: GameResult) {
+            itemView.tvDate.text = gameResult.date.toString()
+            itemView.tvHomeTeam.text = gameResult.homeTeam
+            itemView.tvAwayTeam.text = gameResult.awayTeam
             itemView.tvLine.text = "-"
-            itemView.tvHomeScore.text = game.homeScore.toString()
-            itemView.tvAwayScore.text = game.awayScore.toString()
+            itemView.tvHomeScore.text = gameResult.homeScore.toString()
+            itemView.tvAwayScore.text = gameResult.awayScore.toString()
         }
     }
 

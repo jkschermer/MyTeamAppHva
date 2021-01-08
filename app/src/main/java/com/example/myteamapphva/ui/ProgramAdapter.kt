@@ -5,18 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteamapphva.R
-import com.example.myteamapphva.models.Game
+import com.example.myteamapphva.models.GameResult
 import kotlinx.android.synthetic.main.item_program.view.*
 
-class ProgramAdapter(private var program: ArrayList<Game>) : RecyclerView.Adapter
+class ProgramAdapter(private var program: ArrayList<GameResult>) : RecyclerView.Adapter
     <ProgramAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun databind(game: Game) {
-            itemView.tvDate.text = game.date.toString()
-            itemView.tvHomeTeam.text = game.homeTeam
-            itemView.tvAwayTeam.text = game.awayTeam
+        fun databind(gameResult: GameResult) {
+            itemView.tvDate.text = gameResult.date.toString()
+            itemView.tvHomeTeam.text = gameResult.homeTeam
+            itemView.tvAwayTeam.text = gameResult.awayTeam
             itemView.tvLine.text = "-"
         }
 

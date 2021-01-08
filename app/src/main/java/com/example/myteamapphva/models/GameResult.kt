@@ -1,6 +1,7 @@
 package com.example.myteamapphva.models
 
-data class Game(
+
+data class GameResult(
         var id: Int?,
         var date: String?,
         var homeTeam: String?,
@@ -8,5 +9,5 @@ data class Game(
         var homeScore: Int?,
         var awayScore: Int?
 )  {
-    constructor() : this(0,null, "","",0,0)
+    constructor() : this(0,"", "","",0,0)
 }

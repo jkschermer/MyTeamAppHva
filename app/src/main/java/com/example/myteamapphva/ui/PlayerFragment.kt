@@ -19,6 +19,7 @@ class PlayerFragment : Fragment() {
     private lateinit var playerAdapter: PlayerAdapter
     private lateinit var auth: FirebaseAuth
     private val userViewModel: UserViewModel by viewModels()
+    private var player = User()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,13 @@ class PlayerFragment : Fragment() {
         // init user objects
         auth.currentUser?.uid?.let { userViewModel.getPlayers(it) }
 
+        // init user object
+        auth.currentUser?.uid?.let { userViewModel.getPlayer(it) }
+
+
+
         observeDataUsers()
+        observeCurrentUser()
         initView()
     }
 
@@ -57,6 +64,17 @@ class PlayerFragment : Fragment() {
             players.clear()
             players.addAll(user)
             playerAdapter.notifyDataSetChanged()
+        })
+    }
+
+    /**
+     *  Observe current user object
+     */
+    private fun observeCurrentUser() {
+        userViewModel.currentUser.observe(viewLifecycleOwner, Observer { user ->
+            player = user
+            // set textview
+            tvClubNamePlayers.text = player.team
         })
     }
 }
